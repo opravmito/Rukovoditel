@@ -1,22 +1,11 @@
-<h1>Supported tags and respective <code>Dockerfile</code> links</h1>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.9/Dockerfile"><code>2.9 latest</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.9.Beta2/Dockerfile"><code>2.9.Beta2</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.8.3/Dockerfile"><code>2.8.3</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.8.2/Dockerfile"><code>2.8.2</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.8/Dockerfile"><code>2.8</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.8.Beta2/Dockerfile"><code>2.8.Beta2</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.7.2/Dockerfile"><code>2.7.2</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.7.1/Dockerfile"><code>2.7.1</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.7/Dockerfile"><code>2.7</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.7.Beta2/Dockerfile"><code>2.7.Beta2</code></a></li>
-<li><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/blob/master/2.6.1/Dockerfile"><code>2.6.1</code></a></li>
-<h1>Quick reference</h1>
-<li><b>Where to get help: </b><a href="https://forum.rukovoditel.net">Rukovoditel forum</a></li>
-<li><b>Where to file issues: </b><a href="https://github.com/filipmilasinovic/RukovoditelInDocker/issues">https://github.com/filipmilasinovic/Rukovoditel/issues</a></li>
-<li><b>Repository maintained by: </b><a href="https://github.com/filipmilasinovic/RukovoditelInDocker">Filip Milašinović</a></li>
-<li><b>Official website: </b><a href="https://www.rukovoditel.net/">Rukovoditel.net</a></li>
-<li><b>Documentation: </b><a href="https://docs.rukovoditel.net/">Official Rukovoditel documentation</a></li>
-<h1>How to use this image</h1>
+<h1>Поддерживаемые репозитории <code>Dockerfile</code> </h1>
+<li><a href="https://github.com/registriren/Rukovoditel/blob/master/3.4.2/Dockerfile"><code>3.4.2 latest</code></a></li>
+<h1>Ресурсы приложения</h1>
+<li><b>Ответы на вопросы: </b><a href="https://forum.rukovoditel.net.ru">Форум</a></li>
+<li><b>Официальный сайт: </b><a href="https://www.rukovoditel.net.ru/">Rukovoditel.net.ru</a></li>
+<li><b>Документация: </b><a href="https://docs.rukovoditel.net.ru/">Официальная документация CRM Руководитель</a></li>
+<li><b>Группа в Телеграм: </b><a href="https://t.me/crm_rukovoditel">Неофициальное сообщество</a></li>
+<h1>Как использовать образ</h1>
 <p>To use Rukovoditel you need a web server with Rukovoditel website, a database, storage for your data and a way to connect those.</p>
 <li><b>First: </b>You need a Docker network - see Creating the Network;</a>
 <li><b>Second: </b>You need a database container - see Creating the Database Container;</a>
@@ -59,7 +48,7 @@ Example: -p 8080:80 will map containers port 80 to hosts port 8080 so you can ac
 <div class="highlight highlight-text-shell-session"><pre>version: '3'
 services:
         rukovoditel:
-                image: filipmil/rukovoditel:latest
+                image: registriren/rukovoditel:latest
                 volumes:
                         - RukovoditelWEB:/var/www/html
                 networks:
