@@ -60,6 +60,7 @@ Vytvořte kontejner s názvem RukovoditelWEB, svazek Docker pro ukládání dat 
 ```
 docker run -dit --rm --name rukovoditel --network RukovoditelNET -v RukovoditelWEB:/var/www/html -p 8008:80 registriren/rukovoditel
 ```
+
 Hodnota portu `8008` musí být nastavena nezávisle, s ohledem na fungující služby na vašem serveru.
 
 ## Spuštění a počáteční konfigurace správce webového serveru:
@@ -98,7 +99,7 @@ docker exec -i mariadb sh -c 'exec mysql -user USERNAME --password' < /vaše/ces
 
 # Použití docker-compose:
 
-Webovou aplikaci Leader lze nainstalovat také pomocí docker-compose:
+Webovou aplikaci lze nainstalovat také pomocí docker-compose:
 
 ```
 version: '3'
