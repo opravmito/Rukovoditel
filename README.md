@@ -1,104 +1,104 @@
-# Описание проекта
+# Popis projektu
 
-CRM Руководитель является бесплатным приложением - **конструктором баз данных** с открытым кодом, предназначенным для установки на собственный локальный сервер или интернет сервер с поддержкой PHP/MySQL. Основатель проекта Сергей Харчишин.
+CRM Manager je bezplatná aplikace - **návrhář databáze** s otevřeným zdrojovým kódem, určená pro instalaci na váš vlastní lokální server nebo internetový server s podporou PHP/MySQL. Zakladatelem projektu je Sergej Kharchishin.
 
-Проект разделен на две части: основную (бесплатную) и [дополнение](https://www.rukovoditel.net.ru/extension.php). В основной части вы найдете набор инструментов для конструирования и настройки вашего приложения.
+Projekt je rozdělen na dvě části: hlavní (zdarma) a [rozšíření](https://www.rukovoditel.net.ru/extension.php). V hlavní části naleznete sadu nástrojů pro návrh a přizpůsobení vaší aplikace.
 
-В [Дополнение ](https://www.rukovoditel.net.ru/extension.php)входит набор отчетов и инструментов для более эффективного планирования и управления.
+[Dodatek](https://www.rukovoditel.net.ru/extension.php) obsahuje sadu přehledů a nástrojů pro efektivnější plánování a správu.
 
-[Дополнение ](https://www.rukovoditel.net.ru/extension.php) является платным расширением проекта и не входит в данный образ.
+[Dodatek ](https://www.rukovoditel.net.ru/extension.php) je placené rozšíření projektu a není součástí tohoto obrázku.
 
-# Ресурсы приложения
+# Zdroje aplikace
 
-* **Официальный сайт:** [Rukovoditel.net.ru](https://www.rukovoditel.net.ru/)
-* **Документация:** [Официальная документация CRM Руководитель](https://docs.rukovoditel.net.ru/)
-* **Ответы на вопросы:** [Официальный форум](https://forum.rukovoditel.net.ru)
-* **Группа в Telegram:** [Неофициальное сообщество CRM Руководитель](https://t.me/crm_rukovoditel)
-* **Репозиторий GitHub** [Неофициальный CRM Руководитель в Docker](https://github.com/registriren/Rukovoditel)
+* **Oficiální webové stránky:** [Rukovoditel.net.ru](https://www.rukovoditel.net.ru/)
+* **Dokumentace:** [Oficiální dokumentace CRM Manager](https://docs.rukovoditel.net.ru/)
+* **Odpovědi na otázky:** [Oficiální fórum](https://forum.rukovoditel.net.ru)
+* **Telegramová skupina:** [Neoficiální komunitní správce CRM](https://t.me/crm_rukovoditel)
+* **Úložiště GitHub** [Neoficiální správce CRM v Dockeru](https://github.com/registriren/Rukovoditel)
 
-# Поддерживаемые версии приложения в Dockerfile
+# Podporované verze aplikací v Dockerfile
 
-* [3.4.2 latest](https://github.com/registriren/Rukovoditel/blob/master/3.4.2/Dockerfile)
+* [3.4.2 nejnovější](https://github.com/registriren/Rukovoditel/blob/master/3.4.2/Dockerfile)
 
-# Как использовать образ
+# Jak používat obrázek
 
-1. Создаем общую сеть для базы данных и приложения Руководитель.
-2. Создаем контейнер базы данных .
-3. Создаем контейнер приложения (веб-сервер) Руководитель.
-4. Осуществляем первичную настройку веб-сервера Руководитель, создаём связь с базой данных.
-5. Удаляем инсталлятор (каталог `install`) из тома на котором развернуто приложение Руководитель.
-6. Организуем резервирование данных.
+1. Vytvoříme společnou síť pro databázi a aplikaci Manager.
+2. Vytvořte databázový kontejner.
+3. Vytvořte správce aplikačního kontejneru (webového serveru).
+4. Provedeme prvotní nastavení Správce web serveru, vytvoříme spojení s databází.
+5. Odeberte instalační program (adresář `install`) ze svazku, na kterém je nasazena aplikace Manager.
+6. Organizujeme zálohování dat.
 
-## Создание сети:
+## Vytvoření sítě:
 
-Прежде чем создавать какие-либо контейнеры, вам понадобится общая сеть для взаимодействия контейнеров веб-сервера и базы данных.
+Než vytvoříte kontejnery, budete potřebovat společnou síť, se kterou bude webový server a databázové kontejnery komunikovat.
 
-Создайте локальную Docker сеть:
-
-```
-docker network create RukovoditelNET
-```
-
-## Создание контейнера базы данных:
-
-Для управления данными вам нужна база данных, а для хранения данных вам необходимо постоянное хранилище. В данном случае это MariaDB и Docker том. Вы можете выбрать другую базу данных, например MySQL, или хранить данные в папке хост-машины.
-
-Создайте контейнер базы данных MariaDB и Docker том RukovoditelDB для хранения данных:
+Vytvořte místní síť Docker:
 
 ```
-docker run -d -p 3306:3306 --rm --name mariadb --network RukovoditelNET -v RukovoditelDB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=ruser -e MYSQL_PASSWORD=secret -e MYSQL_DATABASE=rukovoditel mariadb
+docker network vytvořit RukovoditelNET
 ```
 
-Значение переменных `MYSQL_ROOT_PASSWORD=secret, MYSQL_USER=ruser, MYSQL_PASSWORD=secret, MYSQL_DATABASE=rukovoditel` можно задать самостоятельно. В дальнейшем они вам понадобятся при первичной настройке веб-сервера.
+## Vytvořte databázový kontejner:
 
-## Создание контейнера веб-сервера Руководитель:
+Ke správě dat potřebujete databázi a k ​​ukládání dat potřebujete trvalé úložiště. V tomto případě jde o svazek MariaDB a Docker. Můžete si vybrat jinou databázi, například MySQL, nebo uložit data do složky na hostitelském počítači.
 
-Наконец, когда сеть и база данных будут готовы, вы можете запустить контейнер приложения Руководитель.
+Vytvořte databázový kontejner MariaDB a svazek Docker RukovoditelDB pro uložení dat:
 
-Создайте контейнер Руководитель, том Docker RukovoditelWEB для хранения данных и подключите его к сети:
+```
+docker run -d -p 3306:3306 --rm --name mariadb --network RukovoditelNET -v RukovoditelDB:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=ruser -e MYSQL_PASSWORD=secret_ATADASEitel -e mariadb
+```
+
+Hodnotu proměnných `MYSQL_ROOT_PASSWORD=secret, MYSQL_USER=user, MYSQL_PASSWORD=secret, MYSQL_DATABASE=rukovoditel` lze nastavit nezávisle. V budoucnu je budete potřebovat při prvním nastavování webového serveru.
+
+## Vytvoření kontejneru webového serveru Leader:
+
+Nakonec, když jsou síť a databáze připraveny, můžete spustit kontejner aplikace Manager.
+
+Vytvořte kontejner s názvem RukovoditelWEB, svazek Docker pro ukládání dat a připojte jej k síti:
 
 ```
 docker run -dit --rm --name rukovoditel --network RukovoditelNET -v RukovoditelWEB:/var/www/html -p 8008:80 registriren/rukovoditel
 ```
-Значение порта `8008` необходимо задать самостоятельно с учетом функционирующих сервисов на вашем сервере.
+Hodnota portu `8008` musí být nastavena nezávisle, s ohledem na fungující služby na vašem serveru.
 
-## Запуск и первичная настройка веб-сервера Руководитель:
+## Spuštění a počáteční konfigurace správce webového serveru:
 
-Введите в браузере доменное имя или IP-адрес вашего сервера, на котором развёрнуто приложение Руководитель, например `http://localhost:8080`
+Zadejte do prohlížeče název domény nebo IP adresu vašeho serveru, na kterém je aplikace Leader nasazena, například `http://localhost:8080`
 
-Заполните поля для подключения к базе данных используя сведения заданные в переменных `MYSQL_USER=ruser, MYSQL_PASSWORD=secret, MYSQL_DATABASE=rukovoditel`
+Vyplňte pole pro připojení k databázi pomocí informací uvedených v proměnných `MYSQL_USER=uživatel, MYSQL_PASSWORD=secret, MYSQL_DATABASE=rukovoditel`
 
-Введите данные администратора. Готово! Вы можете начать конструировать свое приложение - базу данных.
+Zadejte podrobnosti o svém administrátorovi. Připraveno! Můžete začít budovat svou databázovou aplikaci.
 
-## Удаление инсталлятора:
+## Odebrání instalačního programu:
 
-Удалите каталог `install` ПОСЛЕ установки и первичной настройки веб-сервера Руководитель:
+Po instalaci a počáteční konfiguraci Správce webového serveru odstraňte adresář `install`:
 
 ```
 docker exec rukovoditel /bin/rm -r /var/www/html/install
 ```
 
-## Резервирование и восстановление данных:
+## Zálohování a obnova dat:
 
-### Создание дампа базы данных
+### Vytvořte výpis databáze
 
-Большинство обычных инструментов будут работать, хотя в некоторых случаях их использование может быть немного запутанным, чтобы обеспечить им доступ к серверу mysqld. Простой способ убедиться в этом - использовать docker exec и запустить инструмент из того же контейнера:
-
-```
-docker exec mariadb sh -c 'exec mysqldump -user USERNAME --password --lock-tables --databases DATABASENAME' > /your/path/on/your/host/rukovoditel.sql
-```
-
-### Восстановление данных из дампа базы данных
-
-Для восстановления данных вы можете использовать команду docker exec с флагом -i
+Většina obvyklých nástrojů bude fungovat, i když v některých případech může být jejich použití trochu matoucí, aby bylo zajištěno, že budou mít přístup k serveru mysqld. Snadný způsob, jak to ověřit, je použít docker exec a spustit nástroj ze stejného kontejneru:
 
 ```
-docker exec -i mariadb sh -c 'exec mysql -user USERNAME --password' < /your/path/on/your/host/rukovoditel.sql
+docker exec mariadb sh -c 'exec mysqldump -user USERNAME --password --lock-tables --databases DATABASENAME' > /vaše/cesta/na/váš/hostitel/rukovoditel.sql
 ```
 
-# Использование docker-compose:
+### Obnova dat z výpisu databáze
 
-Установку веб-приложения Руководитель можно осуществить и с помощью docker-compose:
+K obnovení dat můžete použít příkaz docker exec s parametrem -i
+
+```
+docker exec -i mariadb sh -c 'exec mysql -user USERNAME --password' < /vaše/cesta/na/váš/hostitel/rukovoditel.sql
+```
+
+# Použití docker-compose:
+
+Webovou aplikaci Leader lze nainstalovat také pomocí docker-compose:
 
 ```
 version: '3'
