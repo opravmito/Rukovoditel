@@ -4,9 +4,9 @@ CRM Manager je bezplatná aplikace - **návrhář databáze** s otevřeným zdro
 
 Projekt je rozdělen na dvě části: hlavní (zdarma) a [rozšíření](https://www.rukovoditel.net.ru/extension.php). V hlavní části naleznete sadu nástrojů pro návrh a přizpůsobení vaší aplikace.
 
-[Dodatek](https://www.rukovoditel.net.ru/extension.php) obsahuje sadu přehledů a nástrojů pro efektivnější plánování a správu.
+[Rozšíření](https://www.rukovoditel.net.ru/extension.php) obsahuje sadu přehledů a nástrojů pro efektivnější plánování a správu.
 
-[Dodatek ](https://www.rukovoditel.net.ru/extension.php) je placené rozšíření projektu a není součástí tohoto obrázku.
+[Rozšíření](https://www.rukovoditel.net.ru/extension.php) je placené rozšíření projektu a není součástí tohoto obrázku.
 
 # Zdroje aplikace
 
@@ -18,9 +18,9 @@ Projekt je rozdělen na dvě části: hlavní (zdarma) a [rozšíření](https:/
 
 # Podporované verze aplikací v Dockerfile
 
-* [3.4.2 nejnovější](https://github.com/registriren/Rukovoditel/blob/master/3.4.2/Dockerfile)
+* [3.5.1 nejnovější](https://github.com/opravmito/Rukovoditel/blob/master/3.5.1/Dockerfile)
 
-# Jak používat obrázek
+# Jak používat image
 
 1. Vytvoříme společnou síť pro databázi a aplikaci Manager.
 2. Vytvořte databázový kontejner.
